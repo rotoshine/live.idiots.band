@@ -12,7 +12,7 @@ interface Live {
 
 const title = '밴드 이디어츠의 공연 기록'
 const description = '이디어츠는 지금까지 몇번의 공연을 했을까요?'
-const imageUrl = 'https://live.idiots.band/'
+const imageUrl = 'https://live.idiots.band/bg.jpeg'
 const Home: NextPage = ({ liveList }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [visibleLiveList, setVisibleLiveList] = useBoolean(false)
 
