@@ -37,6 +37,7 @@ const Home: NextPage = ({ liveList }: InferGetStaticPropsType<typeof getStaticPr
         justifyContent="center"
         alignItems="center"
         padding="24px"
+        color="white"
       >
         <Head>
           <title>{title}</title>
