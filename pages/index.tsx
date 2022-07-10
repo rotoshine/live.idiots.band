@@ -63,16 +63,16 @@ const Home: NextPage = ({ liveList }: InferGetStaticPropsType<typeof getStaticPr
             <Table bgColor="blackAlpha.600">
               <Thead>
                 <Tr>
-                  <Th>횟수</Th>
-                  <Th>공연일</Th>
-                  <Th>공연명</Th>
+                  <Th color="white">횟수</Th>
+                  <Th color="white">공연일</Th>
+                  <Th color="white">공연명</Th>
                   <Th />
                 </Tr>
               </Thead>
               <Tbody>
                 {liveList.map((live: Live, i: number) => (
                   <Tr key={live.id}>
-                    <Th>{liveList.length - i}</Th>
+                    <Td>{liveList.length - i}</Th>
                     <Td>{new Date(live.startDate).toLocaleDateString()}</Td>
                     <Td>
                       <Box>
