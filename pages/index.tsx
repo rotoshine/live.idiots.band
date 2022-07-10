@@ -66,7 +66,7 @@ const Home: NextPage = ({ liveList }: InferGetStaticPropsType<typeof getStaticPr
         </Box>
         <Box overflowY="scroll">
           {visibleLiveList && (
-            <Table bgColor="blackAlpha.600">
+            <Table bgColor="blackAlpha.600" color="white">
               <Thead>
                 <Tr>
                   <Th>횟수</Th>
