@@ -72,7 +72,7 @@ const Home: NextPage = ({ liveList }: InferGetStaticPropsType<typeof getStaticPr
               <Tbody>
                 {liveList.map((live: Live, i: number) => (
                   <Tr key={live.id}>
-                    <Td>{liveList.length - i}</Th>
+                    <Td>{liveList.length - i}</Td>
                     <Td>{new Date(live.startDate).toLocaleDateString()}</Td>
                     <Td>
                       <Box>
