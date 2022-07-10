@@ -50,7 +50,7 @@ const Home: NextPage = ({ liveList }: InferGetStaticPropsType<typeof getStaticPr
           <meta name="twitter:site" content="winterwolf0412" />
           <meta name="twitter:title" content={title} />
         </Head>
-        <Flex
+        <Box
           fontSize="2xl"
           bgColor="blackAlpha.600"
           padding="16px"
@@ -58,9 +58,12 @@ const Home: NextPage = ({ liveList }: InferGetStaticPropsType<typeof getStaticPr
           marginBottom="16px"
           color="white"
         >
-          이디어츠는 지금까지 <Text fontWeight="bold">{liveList.length}</Text>
+          이디어츠는 지금까지{' '}
+          <Text display="inline" fontWeight="bold">
+            {liveList.length}
+          </Text>
           번의 공연을 했습니다.
-        </Flex>
+        </Box>
         <Box overflowY="scroll">
           {visibleLiveList && (
             <Table bgColor="blackAlpha.600">
@@ -76,7 +79,7 @@ const Home: NextPage = ({ liveList }: InferGetStaticPropsType<typeof getStaticPr
                 {liveList.map((live: Live, i: number) => (
                   <Tr key={live.id}>
                     <Th>{liveList.length - i}</Th>
-                    <Td>{live.startDate}</Td>
+                    <Td>{new Date(live.startDate).toLocaleDateString()}</Td>
                     <Td>
                       <Box>
                         <a href={`https://indistreet.com/live/${live.id}`} rel="noreferrer" target="_blank">
