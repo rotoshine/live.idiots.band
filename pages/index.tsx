@@ -50,7 +50,14 @@ const Home: NextPage = ({ liveList }: InferGetStaticPropsType<typeof getStaticPr
           <meta name="twitter:site" content="winterwolf0412" />
           <meta name="twitter:title" content={title} />
         </Head>
-        <Flex fontSize="2xl" bgColor="blackAlpha.600" padding="16px" borderRadius="16px" marginBottom="16px">
+        <Flex
+          fontSize="2xl"
+          bgColor="blackAlpha.600"
+          padding="16px"
+          borderRadius="16px"
+          marginBottom="16px"
+          color="white"
+        >
           이디어츠는 지금까지 <Text fontWeight="bold">{liveList.length}</Text>
           번의 공연을 했습니다.
         </Flex>
