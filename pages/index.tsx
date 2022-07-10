@@ -50,14 +50,7 @@ const Home: NextPage = ({ liveList }: InferGetStaticPropsType<typeof getStaticPr
           <meta name="twitter:site" content="winterwolf0412" />
           <meta name="twitter:title" content={title} />
         </Head>
-        <Box
-          fontSize="2xl"
-          bgColor="blackAlpha.600"
-          padding="16px"
-          borderRadius="16px"
-          marginBottom="16px"
-          color="white"
-        >
+        <Box fontSize="2xl" bgColor="blackAlpha.600" padding="16px" borderRadius="16px" marginBottom="16px">
           이디어츠는 지금까지{' '}
           <Text display="inline" fontWeight="bold">
             {liveList.length}
@@ -66,7 +59,7 @@ const Home: NextPage = ({ liveList }: InferGetStaticPropsType<typeof getStaticPr
         </Box>
         <Box overflowY="scroll">
           {visibleLiveList && (
-            <Table bgColor="blackAlpha.600" color="white">
+            <Table bgColor="blackAlpha.600">
               <Thead>
                 <Tr>
                   <Th>횟수</Th>
