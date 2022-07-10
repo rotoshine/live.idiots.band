@@ -83,7 +83,7 @@ const Home: NextPage = ({ liveList }: InferGetStaticPropsType<typeof getStaticPr
                     </Td>
                     <Td>
                       <a href={`https://indistreet.com/live/${live.id}`} rel="noreferrer" target="_blank">
-                        <Button>자세히 보기</Button>
+                        <Button bgColor="blackAlpha.600">자세히 보기</Button>
                       </a>
                     </Td>
                   </Tr>
