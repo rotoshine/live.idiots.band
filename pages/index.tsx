@@ -10,11 +10,23 @@ interface Live {
   isCanceled: boolean | null
 }
 
+interface ComputedLive extends Live {
+  startDateObject: Date
+  isCompleted: boolean
+}
+
 const title = '밴드 이디어츠의 공연 기록'
 const description = '이디어츠는 지금까지 몇번의 공연을 했을까요?'
 const imageUrl = 'https://live.idiots.band/bg.jpeg'
 const Home: NextPage = ({ liveList }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [visibleLiveList, setVisibleLiveList] = useBoolean(false)
+  const completedLiveCount = liveList.filter((live: Live) => new Date(live.startDate) <= new Date()).length
+
+  const computedLiveList: ComputedLive[] = liveList.map((live: Live) => ({
+    ...live,
+    startDateObject: new Date(live.startDate),
+    isCompleted: new Date(live.startDate) <= new Date(),
+  }))
 
   return (
     <>
@@ -46,7 +58,6 @@ const Home: NextPage = ({ liveList }: InferGetStaticPropsType<typeof getStaticPr
           <meta property="og:image" content={imageUrl} />
           <meta property="og:description" content={description} />
           <meta name="twitter:description" content={description} />
-          <meta name="twitter:image" content={imageUrl} />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:site" content="winterwolf0412" />
           <meta name="twitter:title" content={title} />
@@ -54,37 +65,61 @@ const Home: NextPage = ({ liveList }: InferGetStaticPropsType<typeof getStaticPr
         <Box fontSize="2xl" bgColor="blackAlpha.600" padding="16px" borderRadius="16px" marginBottom="16px">
           이디어츠는 지금까지{' '}
           <Text display="inline" fontWeight="bold">
-            {liveList.length}
+            {completedLiveCount}
           </Text>
           번의 공연을 했습니다.
         </Box>
-        <Box overflowY="scroll">
+        <Box overflowY={visibleLiveList ? 'scroll' : 'auto'} h={visibleLiveList ? 'calc(100vh - 240px)' : 0}>
           {visibleLiveList && (
-            <Table bgColor="blackAlpha.600">
+            <Table bgColor="blackAlpha.600" variant="simple" fontSize={['xs', null, 'sm', 'md']}>
               <Thead>
                 <Tr>
-                  <Th color="white">횟수</Th>
-                  <Th color="white">공연일</Th>
+                  <Th w="70px" color="white">
+                    횟수
+                  </Th>
+                  <Th w="150px" color="white">
+                    공연일
+                  </Th>
                   <Th color="white">공연명</Th>
-                  <Th />
                 </Tr>
               </Thead>
               <Tbody>
-                {liveList.map((live: Live, i: number) => (
-                  <Tr key={live.id}>
+                {computedLiveList.map((live: ComputedLive, i: number) => (
+                  <Tr
+                    key={live.id}
+                    bgColor={live.isCompleted ? '' : 'blackAlpha.800'}
+                    _hover={{
+                      cursor: 'pointer',
+                      backgroundColor: 'blackAlpha.400',
+                      transition: 'background-color 0.2s ease-in-out',
+                    }}
+                    onClick={() => {
+                      window.open(`https://indistreet.com/live/${live.id}`, '_blank')
+                    }}
+                  >
                     <Td>{liveList.length - i}</Td>
                     <Td>{new Date(live.startDate).toLocaleDateString()}</Td>
                     <Td>
-                      <Box>
-                        <a href={`https://indistreet.com/live/${live.id}`} rel="noreferrer" target="_blank">
+                      <Flex alignContent="center" justifyContent="space-between">
+                        <Box
+                          as="a"
+                          alignSelf="center"
+                          href={`https://indistreet.com/live/${live.id}`}
+                          rel="noreferrer"
+                          target="_blank"
+                        >
                           {live.title}
-                        </a>
-                      </Box>
-                    </Td>
-                    <Td>
-                      <a href={`https://indistreet.com/live/${live.id}`} rel="noreferrer" target="_blank">
-                        <Button bgColor="blackAlpha.600">자세히 보기</Button>
-                      </a>
+                        </Box>
+                        <Box
+                          as="a"
+                          alignSelf="center"
+                          href={`https://indistreet.com/live/${live.id}`}
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          <Button bgColor="blackAlpha.600">자세히 보기</Button>
+                        </Box>
+                      </Flex>
                     </Td>
                   </Tr>
                 ))}
